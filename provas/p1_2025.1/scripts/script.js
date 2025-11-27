@@ -62,5 +62,17 @@ function limpaCarrinho() {
     mostrarItensCarrinho();
 }
 
+function getQtdItensCarrinho() {
+    return carrinho.length;
+}
+
+function realizarPagamento() {
+    if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+    }
+    window.location.href = 'forms.html';
+}
+
 // Linha para carregar o carrinho ao carregar a página
 window.onload = carregaCarrinho;

@@ -19,7 +19,7 @@
         </nav>
         <div class="carrinho">
             <span id="carrinho-contagem">0</span>
-            <img src="img/cart-icon.png" alt="Carrinho de Compras">
+            <img class="carrinho__imagem" src="img/cart-icon.png" alt="Carrinho de Compras">
         </div>
     </header>
     <main>
@@ -31,7 +31,10 @@
             <div class="carrinho-total">
                 <h3>Total: <span id="carrinho-total">0,00</span></h3>
             </div>
-            <button class="carrinho__button" onclick="limpaCarrinho()">Limpar Carrinho</button>
+            <div class="carrinho-actions">
+                <button class="carrinho-actions__limpar-button" onclick="limpaCarrinho()" disabled="getQtdItensCarrinho() === 0">Limpar Carrinho</button>
+                <button class="carrinho-actions__finalizar-button" onclick="realizarPagamento()">Finalizar Compra</button>
+            </div>
         </section>
     </main>
     <footer>

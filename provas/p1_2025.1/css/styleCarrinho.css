@@ -48,7 +48,12 @@
     margin-top: 2rem;
 }
 
-.carrinho__button {
+.carrinho-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.carrinho-actions__limpar-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -60,4 +65,18 @@
 
 .carrinho__button:hover {
     background-color: #0056b3;
+}
+
+.carrinho-actions__finalizar-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.carrinho-actions__finalizar-button:hover {
+    background-color: #1e7e34;
 }
