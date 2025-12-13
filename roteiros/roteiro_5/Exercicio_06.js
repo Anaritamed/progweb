@@ -31,12 +31,13 @@ const decritografar = (textoCriptografado, chaveSecreta) => {
 };
 
 processarNumeros = (numeros, callbackFunction) => {
-  const result = numeros.map((num) =>
-    callbackFunction(num.toString(), "eu_vou_tirar_nota10:D_na_atv_eba")
+  const pares = numeros.filter((numero) => numero % 2 === 0);
+  const result = pares.map((par) =>
+    callbackFunction(par.toString(), "eu_vou_tirar_nota10:D_na_atv_eba")
   );
   return result;
 };
 
-const valoresCriptografados = processarNumeros([1, 2, 3, 4, 5, 6].filter((numero) => numero % 2 === 0), criptografarMensagem)
+const valoresCriptografados = processarNumeros([1, 2, 3, 4, 5, 6], criptografarMensagem)
 console.log(valoresCriptografados);
-console.log(processarNumeros(valoresCriptografados, decritografar));
+console.log(valoresCriptografados.map(valor => decritografar(valor.toString(), "eu_vou_tirar_nota10:D_na_atv_eba")));
