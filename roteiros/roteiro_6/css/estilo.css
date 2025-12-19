@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #aad3df;
+    color: #333333;
+    padding: 1em;
+    text-align: center;
+    position: relative;
+}
+
+#carrinho-icon {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    background-color: white;
+    color: #333;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#carrinho {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1em;
+    display: none;
+    z-index: 1000;
+}
+
+main {
+    padding: 2em;
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1em;
+}
+
+.book {
+    border: 1px solid #ccc;
+    padding: 1em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: lightyellow;
+    border-bottom-width: medium;
+}
+
+.book h3 {
+    margin-top: 0;
+}
+
+.endereco {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+}
+.form {
+    width: 400px;
+}
+
+.form-group {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1em;
+    flex-direction: column;
+    width: inherit;
+}
+
+#map {
+    height: 400px;
+    width: -webkit-fill-available;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #eee;
+}
+
+button {
+    padding: 6px 6px;
+    border-radius: 6px;
+    border-color: transparent;
+    background-color: lightblue;
+}
+
+button:hover {
+    background-color: deepskyblue;
+    color: white;
+}
+
+input {
+    padding: 6px 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+footer {
+    background-color: #aad3df;
+    color: #333333;
+}
