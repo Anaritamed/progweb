@@ -68,6 +68,7 @@ main {
     justify-content: space-between;
     gap: 32px;
 }
+
 .form {
     width: 400px;
 }
@@ -83,6 +84,14 @@ main {
 #map {
     height: 400px;
     width: -webkit-fill-available;
+}
+
+.card {
+    padding: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: lightyellow;
+    border-bottom-width: medium;
 }
 
 footer {

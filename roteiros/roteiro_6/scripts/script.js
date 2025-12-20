@@ -4,8 +4,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const LCC3_COORDS = {
-    lat: -7.216899,
-    lon: -35.908756
+    lat: -7.2148,
+    lon: -35.9141
 };
 
 let marcador;
@@ -40,6 +40,17 @@ const esvaziarCarrinho = () => {
     atualizarCarrinho();
 }
 
+const calcularDistanciaKm = (lat1, lon1, lat2, lon2) => {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+};
+
 const localizarEndereco = () => {
     const cep = document.getElementById('cep').value;
     const endereco = document.getElementById('endereco').value;
@@ -49,44 +60,37 @@ const localizarEndereco = () => {
         return;
     }
 
-    const query = encodeURIComponent(`${endereco}, ${cep}, Brasil`);
+    const query = encodeURIComponent(`${endereco}, ${cep}, Campina Grande, Brasil`);
 
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
         .then(res => res.json())
-        .then(([res]) => {
-            if (!res) {
-                alert("Endereço não encontrado. Verifique os dados.");
+        .then(data => {
+            if (data.length === 0) {
+                alert("Endereço não encontrado. Tente ser mais específico.");
                 return;
             }
 
+            const res = data[0];
             const latDestino = parseFloat(res.lat);
             const lonDestino = parseFloat(res.lon);
 
             map.setView([latDestino, lonDestino], 16);
 
             if (marcador) map.removeLayer(marcador);
-            marcador = L.marker([latDestino, lonDestino])
-                .addTo(map)
-                .bindPopup("Endereço de entrega")
-                .openPopup();
+            marcador = L.marker([latDestino, lonDestino]).addTo(map)
+                .bindPopup("Endereço de entrega").openPopup();
 
             const distanciaKm = calcularDistanciaKm(
-                LCC3_COORDS.lat,
-                LCC3_COORDS.lon,
-                latDestino,
-                lonDestino
+                LCC3_COORDS.lat, LCC3_COORDS.lon,
+                latDestino, lonDestino
             );
-
             const custoEntrega = distanciaKm * 1.20;
 
-            document.getElementById('distancia').textContent =
-                `${distanciaKm.toFixed(2)} km`;
-
-            document.getElementById('custo-entrega').textContent =
-                `R$ ${custoEntrega.toFixed(2)}`;
+            document.getElementById('distancia').textContent = `${distanciaKm.toFixed(2)} km`;
+            document.getElementById('custo-entrega').textContent = `R$ ${custoEntrega.toFixed(2)}`;
         })
         .catch(err => {
             console.error(err);
-            alert("Erro ao buscar localização. Tente novamente mais tarde.");
+            alert("Erro na busca.");
         });
 };
